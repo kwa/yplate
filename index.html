@@ -1,75 +1,550 @@
-<!DOCTYPE html>
-<html>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta charset='utf-8'>
-
-  <title>kwa/yplate @ GitHub</title>
-
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+  <title>
+    yplate  download, examples and documentation
+  </title>
   <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #e6291f;
-      font-family: "Helvetica,Arial,FreeSans";
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #19d6e0; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #19d6e0; }
-    h3 { text-align: center; color: #19d6e0; }
-    a { color: #19d6e0; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+  body {
+    padding: 0 6em 0 2em;
+    font: normal 1em Helvetica, Arial;
+    background-color:#FCFCFF;
+  }
+  h1,h2,h3 {
+    color: #191970;
+  }
+  h3 {
+    margin-top: 2em;
+    margin-bottom: 0em;
+  }
+  code {
+    font-size: 1em;
+  }
+  ul.tos {
+    list-style: none;
+  }
+  div.pre {
+    font-family:monospace;
+    border: 1px solid #000;
+    margin: 0;
+    background-color: #FFFFCC;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+    white-space:pre;
+  }
+  .fpre {
+    font-family:monospace;
+    white-space:pre;
+  }
+  .plate-result {
+    font-size: 1em;
+    padding: 1em;
+    border: 1px solid #000;
+    background-color: #E6E6FA;
+    border-radius: 1em;
+    -moz-border-radius: 1em;
+    -webkit-border-radius: 1em;
+  }
+  .api {
+    font-family:monospace;
+    padding: 1em 0;
+  }
+  .bad {
+    color: #F00;
+  }
+  .error-info td, .error-info th, .pos7 {
+    vertical-align: top;
+    text-align: left;
+  }
+  .etype {
+   white-space: nowrap; 
+  }
+  .limitations, .troubleshooting {
+    max-width: 50%;
+    min-width: 600px;
+    border-collapse:collapse;
+  }
+  .troubleshooting td {
+    padding-top:0.5em;
+    padding-bottom:1em;
+    padding-right:1em;
+    border-top: 1px solid black;    
+  }
+  .outputinfo {
+    font-weight:bold;
+  }
+  .footspace {
+    margin-bottom:4em;
+  }
+  .api-summary dd {
+    padding: 0.5em 0;
+    color: #8B0000;
+  }
+  
+</style>
+
 </head>
-
 <body>
-  <a href="http://github.com/kwa/yplate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/kwa/yplate/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/kwa/yplate/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+  <!--a href="http://github.com/kwa/yplate"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a-->
+  <!--h3> 
+    <a href="http://github.com/kwa/yplate">yplate</a>
+    <span class="small">by <a href="http://github.com/kwa">kwa</a></span>
+  </h3>
+  <div class="description">
+    yplate templating gallery mirror
+  </div-->
+<h1>Install and use yplate</h1>
+  <ul class="tos">
+    <li><a href="#one">How to make the yplate module available on your page</a></li>
+    <li><a href="#five">API summary</a></li>
+    <li><a href="#two">yplate API documentation by example </a></li>
+    <li><a href="#three">Troubleshooting </a></li>
+    <li><a href="#four">Limitations and other important information</a></li>
+  </ul>
+  <h2><a name="one">How to make the yplate module available on your page</a></h2>
+  <h3>Download</h3>
+  <div>License: <a href="http://developer.yahoo.com/yui/license.html">http://developer.yahoo.com/yui/license.html</a></div>
+  <div>
+    You can download this project in either
+    <a href="http://github.com/kwa/yplate/zipball/master">zip</a> or
+    <a href="http://github.com/kwa/yplate/tarball/master">tar</a> formats.
+  </div>
+  <div>You can also clone the project with <a href="http://git-scm.com">Git</a>
+    by running:
+    <p class="fpre">$ git clone git://github.com/kwa/yplate</p>
+  </div>
+  <div>
+    Get the source code on GitHub : <a href="http://github.com/kwa/yplate">kwa/yplate</a>
+  </div>
+  <p>There are a couple of different ways you can make the module available.</p>
+  <ol>
+    <li>If yplate is available on the YUI gallery cdn you can include yplate like any other module like e.g. "node".
+    (By the way, yplate requires Node).
+    <div>
+    <div class="pre">
+  &lt;script type=&quot;text/javascript&quot;&gt;
+   YUI().use('gallery-yplate', function (Y) {
+      // access yplate code here
+   }
+   &lt;/script&gt;
     </div>
-
-    <h1><a href="http://github.com/kwa/yplate">yplate</a>
-      <span class="small">by <a href="http://github.com/kwa">kwa</a></span></h1>
-
-    <div class="description">
-      yplate templating gallery mirror
+    <em>Note that if you access the module from YUI the module is called "gallery-yplate" as opposed to just "yplate".</em>
     </div>
-
-    <h2>License</h2>
-<p>http://developer.yahoo.com/yui/license.html</p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/kwa/yplate/zipball/master">zip</a> or
-      <a href="http://github.com/kwa/yplate/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/kwa/yplate</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/kwa/yplate">kwa/yplate</a>
+    </li>
+    <li>If yplate is available locally relative to the current page:
+      <p>
+        If you have downloaded the module js code and have it in a file called yplate.js then you can do the following
+      </p>
+      <div>
+      
+        <div class="pre">
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;script src=&quot;http://yui.yahooapis.com/3.3.0/build/yui/yui.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+      &lt;script type=&quot;text/javascript&quot; src=&quot;yplate.js&quot;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+      YUI().use('yplate', function (Y) {
+      // access yplate code here
+      });
+     &lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+  <!--html><head><script src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js" charset="utf-8"></script><script type="text/javascript" src="yplate-link.js"></head><body><script type="text/javascript">YUI().use('yplate', function (Y) {// access yplate code here}</script></body>
+  </html-->
+        </div>
+      
+      <em>Note check the name of the module inside the downloaded js file to make sure you are using the correct use(...) module-id.</em>
+      </div>
+    </li>
+    <li>If yplate is available on some server which is not the current server and not hosted at YUI:
+       
+        <div class="pre">
+  &lt;html&gt;
+    &lt;head&gt;&lt;script src=&quot;http://yui.yahooapis.com/3.3.0/build/yui/yui.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;&lt;/head&gt;
+    &lt;body&gt;
+      &lt;script type=&quot;text/javascript&quot;&gt;
+      YUI({
+        modules:  {
+          yplate: {
+            name:'yplate',
+            fullpath: 'http://my.server.com/js/yplate.js',
+            requires: ['node']
+        }
+      }}).use('yplate', function (Y) {
+        // access yplate code here
+        new Y.yplate();
+      });
+      &lt;/script&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+          <!--html><head><script src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js" charset="utf-8"></script></head><body><script type="text/javascript">
+              YUI({                modules:  {                  yplate: {                    name:'yplate',                    fullpath: 'http://my.server.com/js/yplate.js',                    requires: ['node']                }              }}).use('yplate', function (Y) {                // access yplate code here                new Y.yplate();              }              </script>            </body>          </html-->
+        </div>
+      
+    </li>
+  </ol>
+  
+  <h2>
+    <a name="five">
+    API Summary
+    </a>
+  </h2>
+  
+    <dl class="api-summary">
+      <dt>var api = new Y.yplate();</dt>
+      <dd>The constructor to get an instance to work with</dd>
+      
+      <dt>api.plateTag(String /* one character */);</dt>
+      <dd>set the tag character for the api instance. The default is "%". Other choices can for example be "+" or "*"</dd>
+      
+      <dt> api.plate(HTMLnode|Node|String /*template source*/, object|array of object /* model */, String [templatecacheid] /*cache id*/, String [tag] /* tag character whose length = 1*/);</dt>
+      <dd>compiles template source, merges model and template to produce a Node or NodeList.
+      If the optional templatecacheid is provided, the template will be cached.
+      If the optional tag is provided, it will be used instead of the default </dd>
+      
+      <dt>api.platecache(String /*templatecacheid*/, object|array of object, [tag]);</dt>
+      <dd>merges model and cached template to produce a Node or NodeList</dd>
+      
+      <dt>api.plateText(HTMLnode|Node|String /*template source*/, object|array of object /* model */, [templatecacheid] /*cache id*/, [tag] /* tag character*/);</dt>
+      <dd>merges model and template to produce an html string or an array of html string</dd>
+      
+      <dt>api.platecacheText(String /*templatecacheid*/, object|array of object, [tag]);// apply template to data, return html text | array of texts</dt>
+      <dd>merges model and cached template to produce an html string or an array of html string</dd>
+      
+      <dt>api.cachecompile(HTMLnode|Node|String, [templatecacheid]");// add to cache, return pre-compiled string.</dt>
+      <dd>compile template and add to cache if templatecacheid is provided, returns a template,
+      which can be used to with api.cacheadd()</dd>
+      
+      <dt>api.cacheadd(String /*templatecacheid*/, String /*result of api.cachecompile()*/);</dt>
+      <dd>add a pre-compiled template to the cache. Can be used if you pre-compile templates server-side and
+      simply want to insert them on page load or similar.</dd>
+      
+      <dt>api.cacheview(String /*templatecacheid*/);</dt>
+      <dd>check to see if the cache contains something for that id.</dd>
+      
+      <dt>In template variable "YPJ"</dt>
+      <dd>Current index, which starts at 0 (zero), into "YP_DATA"</dd>
+      
+      <dt>In template variable "YP_DATA"</dt>
+      <dd>The model provided as an array. If your input data-model is an array itself it will not be wrapped inside yet another array. It is assumed that each index
+      in the array contains a model for which to apply the template.</dd>
+      
+      <dt>In template variable "YP_DATA_SIZE"</dt>
+      <dd>The length of the "YP_DATA" array
+      </dd>
+    </dl>
+ 
+  
+  
+  <h2>
+    <a name="two">
+    yplate API documentation by example
+    </a>
+  </h2>
+  <div>DOWNLOAD the project files and run "examples.html" to see all of the following examples in action.</div>
+  <h3>
+    <a name="inline-quick">Inline/Quick usage (sort of similar to Y.substitute())</a>
+  </h3>
+  <div>
+    API introduced:
+    <div class="api">
+      yplate(); // constructor<br/>
+      api.plateText(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return html text<br/>
+      api.plate(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return node<br/>
     </div>
-
+    <div class="pre">
+      
+  &lt;div id=&quot;johnNode&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;johnHtml&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+    // create an instance to work with
+    var yp = new Y.yplate();
+    // a model to use with the template
+    var model = {&quot;name&quot;:&quot;John&quot;};
+    // if we want a Node to be returned, and append to existing node.
+    var node = yp.plate(&quot;Hi &lt;%= this.name %&gt; ! Node&quot;, model);
+    Y.one(&quot;#johnNode&quot;).append(node);
+    // or if we want html to be returned to be used with innerHTML
+    var html = yp.plateText(&quot;Hi &lt;%= this.name %&gt; ! html&quot;, model);
+    document.getElementById(&quot;johnHtml&quot;).innerHTML = html;
+  });
+  &lt;/script&gt;      
+          
+    </div>
   </div>
 
+  <h3>
+    <a name="inline-quick">Use different tag character</a>
+  </h3>
+  <div>
+    API introduced:
+    <div class="api">
+      api.plateTag(String);<br/>
+    </div>
+    
+      <div class="pre">
+  &lt;div id=&quot;tagOut&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  //&lt;![CDATA[
+  YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+    // create an instance to work with
+    var yp = new Y.yplate();
+    // change the template tag for all invocations of this (yp) instance.
+    yp.plateTag(&quot;+&quot;);// instead of the default &quot;%&quot; tag.
+    // when we want a html to be returned
+    var html = yp.plateText(&quot;Hi &lt;+= this.name +&gt; !&quot;, {&quot;name&quot;:&quot;Parker&quot;});
+    document.getElementById(&quot;tagOut&quot;).innerHTML = html;
+    // We have set &quot;+&quot; as the tag for the yp instance, but we can override for each invocation if we want to.
+    // For this invocation let us override the tag with &quot;*&quot; see the third parameter.
+    var html2 = yp.plateText(&quot;&lt;br/&gt;Hi &lt;*= this.name *&gt; !&quot;, {&quot;name&quot;:&quot;John&quot;}, null, &quot;*&quot;);
+    document.getElementById(&quot;tagOut&quot;).innerHTML = document.getElementById(&quot;tagOut&quot;).innerHTML + html2 ;
+  });
+  //]]&gt;
+  &lt;/script&gt;        
+      </div>
+    
+  </div>
   
+  <h3>
+    <a name="inline-quick">Compile a template and re-use it</a>
+  </h3>
+  <div>
+    API introduced:
+    <div class="api">
+      api.cachecompile(HTMLnode|Node, [templatecacheid]);// returned value is intended to be used by cacheadd(), you don't have to use the returned value, it will still be cached for the api instance.<br/>
+      api.platecacheText(templatecacheid /*string*/, data|array of data, [tag]);// apply cached template to data, return html text | array of texts<br/>
+    </div>
+    
+      <div class="pre">
+  &lt;div id=&quot;tagOut2&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+    var yp = new Y.yplate();
+    yp.plateTag(&quot;*&quot;);// change tag for fun.
+    // second parameter should be a unique id (a valid javascript identifier name) for the yp instance.
+    // If you use the same id with another template it will be overwritten.
+    yp.cachecompile(&quot;&lt;*= this.name *&gt; &quot;, &quot;quick&quot;);
+    // use cached and compiled template with a model
+    var modelA = {&quot;name&quot;:&quot;John&quot;};
+    var modelB = {&quot;name&quot;:&quot;Fred&quot;};
+    // apply template with different models
+    var htmlA = yp.platecacheText(&quot;quick&quot;, modelA);
+    var htmlB = yp.platecacheText(&quot;quick&quot;, modelB);
+    document.getElementById(&quot;tagOut2&quot;).innerHTML = htmlA + &quot;and &quot; + htmlB;
+  });
+  &lt;/script&gt;        
+      </div>
+    
+  </div>
+  
+  <h3>
+    <a name="inline-quick">Compile, cache, and apply template all at the same time</a>
+  </h3>
+  <div>
+    API introduced:
+    <div class="api">
+      api.platecache(templatecacheid /*string*/, data|array data, [tag]);// apply template to data, return Node | NodeList<br/>
+    </div>
+    
+      <div class="pre">
+  &lt;div id=&quot;tagOut3&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+    var yp = new Y.yplate();
+    yp.plateTag(&quot;*&quot;);
+    var modelA = {&quot;name&quot;:&quot;Patrick&quot;};
+    var modelB = {&quot;name&quot;:&quot;Fred&quot;};
+    // When you supply the third parameter the template will be cached
+    var htmlA = yp.plateText(&quot;Hello &lt;*= this.name *&gt; &quot;, modelA, &quot;myId&quot;);
+    document.getElementById(&quot;tagOut3&quot;).innerHTML = htmlA;
+    // using the fact that we just cached the template, this time we want a YUI Node to be returned.
+    var nodeB = yp.platecache(&quot;myId&quot;, modelB);
+    Y.one(&quot;#tagOut3&quot;).append(nodeB);
+  });
+  &lt;/script&gt;
+      </div>
+    
+  </div>
+  
+  <h3>
+    <a name="inline-quick">Use an array of models for one template</a>
+  </h3>
+  
+    <div class="pre">
+  &lt;div id=&quot;tagOut4&quot;&gt;&lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+    var yp = new Y.yplate(), i, s, html='';
+    yp.plateTag(&quot;*&quot;);
+    var modelArray = [{&quot;name&quot;:&quot;John&quot;}, {&quot;name&quot;:&quot;Fred&quot;}, {&quot;name&quot;:&quot;Joe&quot;}];
+    // when supply an array and use the plateText() function you will get an array of html back.
+    var htmlArray = yp.plateText(&quot;Hello &lt;*= this.name *&gt; - &quot;, modelArray, &quot;myId&quot;);
+    // when supply an array and use the plate() function you will get a YUI NodeList back.
+    var nodeList = yp.plate(&quot;Hello &lt;*= this.name *&gt;&quot;, modelArray);
+    for(i=0, s=htmlArray.length; i &lt; s; i++) {
+      html += htmlArray[i];
+    }
+    // html = htmlArray.join(&quot;&quot;); // would work too right.
+    document.getElementById(&quot;tagOut4&quot;).innerHTML = html;
+  });
+  &lt;/script&gt;
+    </div>
+  
+  <h3>
+    <a name="inline-quick">Use script node for larger templates (this is where YUI.substitute and yplate really start to differ)</a>
+  </h3>
+  <div>
+    API used:
+    <div class="api">
+      escape statement "&lt;%!"<br/>
+      print statement "&lt;%="<br/>
+      code statement "&lt;% "<br/>
+      special variable "YPJ"<br/>
+      special variable "YP_DATA"<br/>
+      special variable "YP_DATA_SIZE"<br/>
+    </div>
+    
+      <div class="pre">
+        
+   &lt;div id=&quot;outputholder&quot;&gt;
+    &lt;span class=&quot;outputinfo&quot;&gt;Actual template applied with array of objects using the example above.&lt;/span&gt;
+    &lt;span id=&quot;loadfail&quot;&gt;If you can read this then YUI and or yplate has failed to load, check that referenced files are present.&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;script type=&quot;text/x-yplate-template&quot; id=&quot;personTemplate&quot;&gt;
+  &lt;![CDATA[
+    &lt;p&gt;
+    Let us try the escape &amp;lt;%! %&amp;gt; statement. &lt;br/&gt;
+    &lt;%! &amp; &amp; &amp; %&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+    Let us try the print &amp;lt;%= %&amp;gt; statement. &lt;br/&gt;
+    &lt;%=this.name %&gt;'s age is: &lt;%=this.age %&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+    Let us try the javascript &amp;lt;% %&amp;gt; statement. &lt;br/&gt;
+    &lt;% var myLocalArray = [1,4,5]; %&gt;
+    &lt;%
+      var myOtherVariable = 0, i, s;
+      // this comment is on its own line
+      for(i = 0, s = myLocalArray.length; i &lt; s; i++) {
+        myOtherVariable += myLocalArray[i];
+      }
+    %&gt;
+    Sum of myOtherVariable: &lt;%= myOtherVariable %&gt;.
+    &lt;/p&gt;
+    &lt;p&gt;
+      Let us try using the ever present special variables&lt;br/&gt;
+      Inside your template you have some template global variables, they are:
+      &lt;ul&gt;
+        &lt;li&gt;YPJ: If your input to one of the yplate functions is an array of data models, then YPJ is the current index into that array.&lt;/li&gt;
+        &lt;li&gt;YP_DATA: Is your data model input as you have submitted it (if you only submitted an object and not an array,
+            your object will be inserted into an array so that YP_DATA is always an array).&lt;/li&gt;
+        &lt;li&gt;YP_DATA_SIZE: The size of YP_DATA.&lt;/li&gt;
+      &lt;/ul&gt;
+      You can for example use these variables when you have provided an array of object-models to the template:&lt;br/&gt;&lt;br/&gt;
+      &lt;div style=&quot;background-color:&lt;%= ( YPJ%2 == 0) ? &quot;pink&quot;: &quot;lightgray&quot;  %&gt;;&quot;&gt;
+        I am model index &lt;%= YPJ %&gt; YP_DATA_SIZE is &lt;%= YP_DATA_SIZE %&gt;&lt;/div&gt;
+    &lt;/p&gt;
+    ]]&gt;
+  &lt;/script&gt;
+
+  &lt;script type=&quot;text/javascript&quot;&gt;
+  YUI().use('yplate', function (Y) {
+    var yp = new Y.yplate();
+    yp.plateTag(&quot;%&quot;);
+    var modelArray = [{&quot;age&quot;:20,&quot;name&quot;:&quot;Mike&quot;}, {&quot;age&quot;:32,&quot;name&quot;:&quot;Ivan&quot;}];
+    var node = yp.plate(Y.one(&quot;#personTemplate&quot;), modelArray);
+    Y.one(&quot;#outputholder&quot;).append(node);
+  });
+  &lt;/script&gt;
+     </div>
+  </div>
+
+
+<h2>
+  <a name="three">
+  Troubleshooting
+  </a>
+</h2>
+<p>
+  When yplate compiles templates it may encounter errors or template code it cannot handle.
+  The following is a list of some of the errors which can arise, their probable causes, and possible solutions.
+</p>
+<table class="troubleshooting" cellpadding="0" cellspacing="0" >
+  <thead>
+    <tr><th class="pos7">Error message</th><th class="pos7">Possible cause/solution</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="etype">"missing ; before statement"</td>
+      <td>1. Make sure that ALL your javascript statements inside the template ends with ";" (semi colon)<br/>
+      2. You cannot put a tag statement within another statement &raquo; <span style="white-space:nowrap">&lt;%! bla bla <span class="bad">&lt;%=</span> this.name <span class="bad">%&gt;</span> %&gt;</span> is bad.
+      <span style="font-weight:bold;">Look over your template for simple syntax errors (common cause of errors).</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="etype">"missing ) after argument list"</td>
+      <td> Perhaps you have used a complex expression inside &lt;%= ... %&gt;. Do complex stuff outside the print statement.
+      <span style="font-weight:bold;">Look over your template for simple syntax errors (common cause of errors).</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="etype">syntax error : "var _YP_ESC_ = function(str)"</td>
+      <td>Hm, perhaps a bug in yplate. Perhaps your template is too complex for yplate or there is some simple error in your template
+      like an extra character like (,{,[ or problematic escape sequences inside your template. <span style="font-weight:bold;">Look over your template for simple syntax errors (common cause of errors).</span></td>
+    </tr>
+    
+    <!--tr><td></td><td></td></tr-->
+  </tbody>
+</table>
+<h2>
+  <a name="four">
+  Limitations and other important information
+  </a>
+</h2>
+<div class="limitations">
+  <p>It is recommended to use CDATA in the script tag as indicated by examples. You can remove the CDATA parts.
+  (Sometimes you want to remove the parts because you have a script template which itself contains a &lt; script %&gt; node,
+  while this specific scenario may work, it is not supported by yplate.)</p>
+  <p>
+    It is recommended to use the different plate* functions with a caching id, because without it the template will be parsed each and
+    every time you use it, which is slow.
+  </p>
+  <p>
+    You can have comments in javascript like // and /**/. If you use // you should make sure that it is on its own line.
+    <strong>yplate does not support templates which have //-style comments on the same line as executable javascript code or html code.</strong>
+    <br/><br/>If you can try and use /**/ style comments.<br/>
+    <br/>
+      Example bad:<br/>
+      
+      &lt;% <br/>
+        <span class="bad"> var a = 2; // this is my comment</span><br/>
+      %&gt;<br/>
+         Example better:<br/>
+      &lt;% <br/>
+        // this is my comment<br/>
+        var a = 2; <br/>
+      %&gt;<br/>
+   
+    
+  </p>
+  <p>
+    The examples provided here do not cover all possible uses and constructs, the examples provided is the minimal set of things   yplate is supposed to be able to do.
+  </p>
+  <p>
+    When applying a model to a template the API functions which end in text like api.plateText() are faster (probably a lot faster) than api.plate() because the former does
+    not have to create a YUI Node/NodeList.
+  </p>
+</div>
+
+<div class="footspace">&nbsp;</div>
+
 </body>
 </html>
+
