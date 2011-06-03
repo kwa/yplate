@@ -268,4 +268,4 @@ return {
 };
 };
  
-}, '0.1.0',{requires:['node']});
+}, '0.1.1',{requires:['node']});
