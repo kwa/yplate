@@ -198,42 +198,13 @@ function ycacheadd(cid, compiledcache){
 function ycacheview(cid){
   return core.platecacheview(cid);
 }
-/**
- * apply cached template to data, return array of html string
- */
-function yplatecacheText(cid, data, tag){
-  var pfn = core.platecompile(cid, null, tag, true);/* throws exception when problem. */
-  return core.plateapply(pfn, data);
-}
-/**
- * apply template to data, return YUI 3 Node[NodeList 
- */
-function yplatecache(cid, data, tag){
-  var txt = yplatecacheText(cid, data, tag), nodes = new Y.all(""),
-  i, isArr = Y.Lang.isArray(txt), s = txt.length;
-   if(isArr) {
-    for(i=0; i<s; i++) {
-      nodes.push(Y.Node.create(txt[i]));
-    }
-  } else {
-    nodes = Y.Node.create(txt);
-  }
-  return nodes;
-}
-/**
- * apply template to data, return array of html string 
- */
-function yplateText(candidate, data, cid, tag) {
-  var pfn = ycachecompile(candidate, cid, tag, true);
-  return core.plateapply(pfn, data);
-}
 
 /**
  * apply template to data, return YUI 3 Node|NodeList 
  */
 function yplate(candidate, data, cid, tag){
   var txt = yplateText(candidate, data, cid, tag), nodes = new Y.all(""),
-  i, isArr = Y.Lang.isArray(txt), s = txt.length;
+  i, isArr = Y.Lang.isArray(txt) && txt.length > 1, s = txt.length;
   if(isArr) {
     for(i=0; i<s; i++) {
       nodes.push(Y.Node.create(txt[i]));
@@ -243,6 +214,39 @@ function yplate(candidate, data, cid, tag){
   }
   return nodes;
 }
+
+/**
+ * apply template to data, return YUI 3 Node[NodeList 
+ */
+function yplatecache(cid, data, tag){
+  var txt = yplatecacheText(cid, data, tag), nodes = new Y.all(""),
+  i, isArr = Y.Lang.isArray(txt) && txt.length > 1, s = txt.length;
+   if(isArr) {
+    for(i=0; i<s; i++) {
+      nodes.push(Y.Node.create(txt[i]));
+    }
+  } else {
+    nodes = Y.Node.create(txt);
+  }
+  return nodes;
+}
+
+/**
+ * apply template to data, return array of html string 
+ */
+function yplateText(candidate, data, cid, tag) {
+  var pfn = ycachecompile(candidate, cid, tag, true);
+  return core.plateapply(pfn, data);
+}
+
+/**
+ * apply cached template to data, return array of html string
+ */
+function yplatecacheText(cid, data, tag){
+  var pfn = core.platecompile(cid, null, tag, true);/* throws exception when problem. */
+  return core.plateapply(pfn, data);
+}
+
 /**
  * changes the current/default tag used by this instance
  */
