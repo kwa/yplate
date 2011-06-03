@@ -1,0 +1,297 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+  <title>
+    Test yplate using YUI Test 
+  </title>
+  <script src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js" charset="utf-8"></script>
+  <script src="cyplate.js" charset="utf-8"></script>
+      
+  <style type="text/css">
+    .button {
+      background-color:#eee;
+      cursor:pointer;
+      display:block;
+      float:left;
+      padding:0.5em;
+      -moz-border-radius:0.25em;
+      -webkit-border-radius:0.25em;
+      border-radius:0.25em;
+      border-style:outset;
+    }
+    
+    .over {
+      border-style:inset;
+    }
+    
+    #indicator {
+      display:block;
+      width: 5em;
+    }
+    
+    .pass {
+      background-color:green;
+    }
+    
+    .fail {
+      background-color:red;
+    }
+  </style>
+</head>
+<body class="yui3-skin-sam">
+<h1>Test yplate using YUI test module</h1>
+<ul>
+  <li>Using YUI 3.3.0</li>
+  <li>Using YUI Test as testing framework</li>
+  <li>Using yplate version v0.1.1 which has modifications compared with galley-yplate:'gallery-2011.02.18-23-10' </li>
+</ul>
+
+<br/>
+<span id="yitest" class="button">Click here to (re-) run yplate tests <span id="indicator">&nbsp;</span></span>
+<br/>
+
+<script id="simpleStatement" type="text/x-yplate-template">
+  <![CDATA[
+  // test for one line comment
+  <p> this.value = <%= this.value %> /* test for block comment */!</p>
+  Testing code statement below.
+  <%
+  var dummy = "dummy";
+  if(dummy) {
+    dummy = 2;
+  }%>
+  ]]> 
+</script>
+
+<script type="text/javascript">
+var Y = YUI({
+  //Last Gallery Build of this module
+    //gallery: 'gallery-2011.02.18-23-10'
+}).use('yplate', 'test','console','event', function(Y) {
+  
+  var entryTemplate = '<div class="{entry_class} {cat_class} {src_class}">'+
+  '<p class="{entry_meta_class}">'+
+  '<span style="" class="{entry_src_class}">{sourceAndDetail}</span>'+
+  '<span class="{entry_cat_class}">{category}</span>'+
+  '<span style="display:none" class="{entry_time_class}"> {totalTime}ms (+{elapsedTime}) {localTime}</span>'+
+  '</p>'+
+  '<pre style="font-size:large;" class="{entry_content_class}">{message}</pre></div>';
+  var log = new Y.Console({newestOnTop:false, height:"500px", useBrowserConsole:false,entryTemplate:entryTemplate});
+  log.render();
+  var info = function(m) {log.log(m)},
+      warn = function(m) {log.log(m,"warn")},
+      err = function(m) {log.log(m,"error")};
+  var line = function(er){
+    var q = "line:" + er.lineNumber || er.line || "??";
+    return q;
+  }
+  
+  /*****************************************************************/
+  /* Basic/Fundamental coverage tests.
+     Todo, more tests with varying imput data e.g.,
+     testing different tag symbols explicitly,
+     testing statements <% <%=* <% more,
+     testing special variables YPJ and the others more,
+     testing dom templates,
+     more...
+  */
+  var yptest = new Y.Test.Case({
+    
+    name:"YPLATE tests",
+    
+    "constructor should exist" : function () {
+      var Assert = Y.Assert;
+      Assert.isObject(new Y.yplate(), line(new Error()));
+      //Assert.isString("");
+      //Assert.areEqual("test", "test");
+    },
+    
+    "interface functions should exist" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+      
+      Assert.isFunction(yp.plate, line(new Error()));
+      Assert.isFunction(yp.platecache, line(new Error()));
+      Assert.isFunction(yp.plateText, line(new Error()));
+      Assert.isFunction(yp.platecacheText, line(new Error()));
+      Assert.isFunction(yp.cachecompile, line(new Error()));
+      Assert.isFunction(yp.cacheview, line(new Error()));
+    },
+
+    "plate with single model should produce Node" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+      
+      var node = yp.plate("<%= this.value %>", {value:"text"});
+      Assert.isTrue(node instanceof Y.Node,line(new Error()));
+      Assert.isFalse(node instanceof Y.NodeList,line(new Error()));
+    },
+    
+    "plate with array of models should produce NodeList" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+      
+      var models = [{value:"text"}, {value:"text"}];
+      var nodes = yp.plate("<%= this.value %>", models);
+      Assert.isTrue(nodes instanceof Y.NodeList,line(new Error()));
+      Assert.isFalse(nodes instanceof Y.Node,line(new Error()));
+    },
+    
+    "plate with array AS model should produce Node" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+      var modelArray = ["text"];
+      var node = yp.plate("<p><%= this %></p>", modelArray);
+      Assert.isFalse(node instanceof Y.NodeList,line(new Error()));
+      Assert.isTrue(node instanceof Y.Node,line(new Error()));
+      Assert.areEqual("text", node.getContent(), line(new Error()));
+    },
+    
+    "plateText should produce length 1 Array" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+
+      var tarray = yp.plateText("<%= this.value %>", {value:"text"});
+      Assert.isArray(tarray, line(new Error()));
+      Assert.areEqual(1, tarray.length, line(new Error()));
+      Assert.isString(tarray[0],line(new Error()));
+      Assert.areEqual("text", tarray[0], line(new Error()));
+    },
+    
+    "plateText with array of models should produce Array" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+
+      var tarray = yp.plateText("<%= this.value %>", [{value:"text"}, {value:"text"} ]);
+      Assert.isArray(tarray, line(new Error()));
+      Assert.areEqual(2, tarray.length, line(new Error()));
+      Assert.isString(tarray[0],line(new Error()));
+      Assert.areEqual("text", tarray[0], line(new Error()));
+    },
+    
+    "plateText with template for DOM should work" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate();
+
+      var tarray = yp.plateText(Y.one("#simpleStatement"), {value:"text"});
+      Assert.isArray(tarray, line(new Error()));
+      Assert.areEqual(1, tarray.length, line(new Error()));
+      Assert.isString(tarray[0],line(new Error()));
+      Assert.isTrue(tarray[0].indexOf("below") > 0, line(new Error()));
+    },
+    
+    "platecacheText should produce cachedtext (also tests cachecompile)" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate(); 
+      
+      yp.cachecompile("<%= this.name %> ", "quick");
+      var model = {"name":"John"};
+      var text = yp.platecacheText("quick", model)[0];
+      Assert.isString(text,line(new Error()));
+      Assert.areEqual("John ", text, line(new Error())); // notice the white space.
+    },
+    
+    "cachecompile should compile a template" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate(); 
+      
+      var text = yp.cachecompile("<%= this.name %> ");
+      Assert.isString(text,line(new Error()));
+    },
+    
+    "cachecompile should compile a template with id" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate(); 
+      
+      yp.cachecompile("<%= this.name %> ", "quick");
+      var text = yp.cacheview("quick");
+      Assert.isString(text,line(new Error()));
+    },
+    
+    "cacheview should find a cached template" : function () {
+      var Assert = Y.Assert;
+      var yp = new Y.yplate(); 
+      
+      yp.cachecompile("<%= this.name %> ", "quick");
+      var text = yp.cacheview("quick");
+      Assert.isString(text,line(new Error()));
+    },
+   
+  });
+  var publicAPI = new Y.Test.Suite("yplate public interface");
+  publicAPI.add(yptest);
+  
+  /*****************************************************************/
+  /*****************************************************************/
+  /*****************************************************************/
+  /*****************************************************************/
+  /*
+    Only one test -> need more... 
+   */
+  var coretest = new Y.Test.Case({
+    
+    name:"PlateCore tests",
+    
+    "PlateCore should be accessible from yplate" : function () {
+      var Assert = Y.Assert;
+      var core = new Y.yplate(true);
+      Assert.isObject(core, line(new Error()));
+      Assert.isFunction(core.plateTag, line(new Error()));
+    },
+  });
+  
+  var coreAPI = new Y.Test.Suite("PlateCore functionality");
+  coreAPI.add(coretest);
+  
+  /*****************************************************************/
+  /*****************************************************************/
+  var TR = Y.Test.Runner;
+  TR.add(publicAPI);
+  TR.add(coreAPI);
+  TR.subscribe(TR.TEST_FAIL_EVENT, function(data){err( data.error.toString())});
+  TR.subscribe(TR.COMPLETE_EVENT, function(data, type){
+    Y.one('#indicator').removeClass("fail").removeClass("pass").addClass(data.results.failed == 0 ? "pass" : "fail");
+  });
+  TR.run();
+
+  /*****************************************************************/
+  var yiclick = function(e){
+    log.reset();
+    Y.Test.Runner.run();
+  };
+  var yimouseover = function(e){
+    if(this.setAttribute){
+      this.setAttribute("class","button over");
+    }
+  };
+  var yimouseout = function(e){
+    if(this.setAttribute){
+      this.setAttribute("class","button");
+    }
+  };
+  Y.on("click", yiclick, "#yitest");
+  Y.on("mouseover", yimouseover, "#yitest");
+  Y.on("mouseout", yimouseout, "#yitest");
+});
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
