@@ -410,6 +410,31 @@
   &lt;/script&gt;        
       </div>
     
+
+    Result:
+    
+      <div class="plate-result">
+      <div id="tagOut2"></div>
+      <script type="text/javascript">
+      //<![CDATA[
+      YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+        var yp = new Y.yplate();
+        yp.plateTag("*");// change tag for fun.
+        // second parameter should be a unique id (a valid javascript identifier name) for the yp instance.
+        // If you use the same id with another template it will be overwritten.
+        yp.cachecompile("<*= this.name *> ", "quick");
+        // use cached and compiled template with a model
+        var modelA = {"name":"John"};
+        var modelB = {"name":"Fred"};
+        // apply template with different models
+        var htmlA = yp.platecacheText("quick", modelA);
+        var htmlB = yp.platecacheText("quick", modelB);
+        document.getElementById("tagOut2").innerHTML = htmlA + "and " + htmlB;
+      });
+      //]]>
+      </script>
+      </div>
+    
   </div>
   
   <h3>
