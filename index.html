@@ -346,6 +346,32 @@
   &lt;/script&gt;      
           
     </div>
+    Result:
+      <div class="plate-result">
+      
+      <div id="johnNode">
+        <span id="loadfail">If you are reading this then YUI and or yplate has failed to load, check that YUI and yplate files are present.</span>
+      </div>
+      <div id="johnHtml"></div>
+      <script type="text/javascript">
+      //<![CDATA[
+      YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+        Y.one("#loadfail").remove();
+        // create an instance to work with
+        var yp = new Y.yplate();
+        // a model to use with the template
+        var model = {"name":"John"};
+        // if we want a Node to be returned, and append to existing node.
+        var node = yp.plate("Hi <%= this.name %> ! Node", model);
+        Y.one("#johnNode").append(node);
+        // or if we want html to be returned to be used with innerHTML
+        var html = yp.plateText("Hi <%= this.name %> ! html", model);
+        document.getElementById("johnHtml").innerHTML = html;
+      });
+      //]]>
+      </script>
+      
+      </div>
   </div>
 
   <h3>
@@ -376,6 +402,29 @@
   });
   //]]&gt;
   &lt;/script&gt;        
+      </div>
+    
+    Result:
+    
+      <div class="plate-result">
+      <div id="tagOut"></div>
+      <script type="text/javascript">
+      //<![CDATA[
+      YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+        // create an instance to work with
+        var yp = new Y.yplate();
+        // change the template tag for all invocations of this (yp) instance.
+        yp.plateTag("+");// instead of the default "%" tag.
+        // when we want a html to be returned
+        var html = yp.plateText("Hi <+= this.name +> !", {"name":"Parker"});
+        document.getElementById("tagOut").innerHTML = html;
+        // We have set "+" as the tag for the yp instance, but we can override for each invocation if we want to.
+        // For this invocation let us override the tag with "*" see the third parameter.
+        var html2 = yp.plateText("<br/>Hi <*= this.name *> !", {"name":"John"}, null, "*");
+        document.getElementById("tagOut").innerHTML = document.getElementById("tagOut").innerHTML + html2 ;
+      });
+      //]]>
+      </script>
       </div>
     
   </div>
@@ -464,6 +513,28 @@
   &lt;/script&gt;
       </div>
     
+    Result:
+    
+      <div class="plate-result">
+      <div id="tagOut3"></div>
+      <script type="text/javascript">
+      //<![CDATA[
+      YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+        var yp = new Y.yplate();
+        yp.plateTag("*");
+        var modelA = {"name":"Patrick"};
+        var modelB = {"name":"Fred"};
+        // When you supply the third parameter the template will be cached
+        var htmlA = yp.plateText("Hello <*= this.name *> ", modelA, "myId");
+        document.getElementById("tagOut3").innerHTML = htmlA;
+        // using the fact that we just cached the template, this time we want a YUI Node to be returned.
+        var nodeB = yp.platecache("myId", modelB);
+        Y.one("#tagOut3").append(nodeB);
+      });
+      //]]>
+      </script>
+      </div>
+    
   </div>
   
   <h3>
@@ -489,6 +560,32 @@
   });
   &lt;/script&gt;
     </div>
+  
+  <div>Result:
+    
+      <div class="plate-result">
+      <div id="tagOut4"></div>
+      <script type="text/javascript">
+       //<![CDATA[
+      YUI().use('yplate', function (Y) {// choose a way to make yplate available...
+        var yp = new Y.yplate(), i, s, html='';
+        yp.plateTag("*");
+        var modelArray = [{"name":"John"}, {"name":"Fred"}, {"name":"Joe"}];
+        // when supply an array and use the plateText() function you will get an array of html back.
+        var htmlArray = yp.plateText("Hello <*= this.name *> - ", modelArray, "myId");
+        // when supply an array and use the plate() function will get a YUI NodeList back.
+        var nodeList = yp.plate("Hello <*= this.name *>", modelArray);
+        for(i=0, s=htmlArray.length; i < s; i++) {
+          html += htmlArray[i];
+        }
+        // html = htmlArray.join(""); // would work too right.
+        document.getElementById("tagOut4").innerHTML = html;
+      });
+      //]]>
+      </script>
+     </div>
+    
+  </div>
   
   <h3>
     <a name="inline-quick">Use script node for larger templates (this is where YUI.substitute and yplate really start to differ)</a>
@@ -558,6 +655,61 @@
   });
   &lt;/script&gt;
      </div>
+    
+    Result:
+    <div class="plate-result">
+    <div id="outputholder">
+      
+    </div>
+    </div>
+    <script type="text/x-yplate-template" id="personTemplate">
+    //<![CDATA[
+      <p>
+      Let us try the escape &lt;%! %&gt; statement. <br/>
+      <%! & & & %>
+      </p>
+      <p>
+      Let us try the print &lt;%= %&gt; statement. <br/>
+      <%=this.name %>'s age is: <%=this.age %>
+      </p>
+      <p>
+      Let us try the javascript &lt;% %&gt; statement. <br/>
+      <% var myLocalArray = [1,4,5]; %>
+      <%
+        var myOtherVariable = 0, i, s;
+        // this comment is on its own line
+        for(i = 0, s = myLocalArray.length; i < s; i++) {
+          myOtherVariable += myLocalArray[i];
+        }
+      %>
+      Sum of myOtherVariable: <%= myOtherVariable %>.
+      </p>
+      <p>
+        Let us try using the ever present special variables<br/>
+        Inside your template you have some template global variables, they are:
+        <ul>
+          <li>YPJ: If your input to one of the yplate functions is an array of data models, then YPJ is the current index into that array.</li>
+          <li>YP_DATA: Is your data model input as you have submitted it (if you only submitted an object and not an array,
+              your object will be inserted into an array so that YP_DATA is always an array).</li>
+          <li>YP_DATA_SIZE: The size of YP_DATA.</li>
+        </ul>
+        You can for example use these variables when you have provided an array of object-models to the template:<br/><br/>
+        <div style="background-color:<%= ( YPJ%2 == 0) ? "yellow": "#fff"  %>;">
+          I am model index <%= YPJ %> YP_DATA_SIZE is <%= YP_DATA_SIZE %></div>
+      </p>
+      //]]>
+    </script>
+    <script type="text/javascript">
+    //<![CDATA[
+    YUI().use('yplate', function (Y) {
+      var yp = new Y.yplate();
+      yp.plateTag("%");
+      var modelArray = [{"age":20,"name":"Mike"}, {"age":32,"name":"Ivan"}];
+      var node = yp.plate(Y.one("#personTemplate"), modelArray);
+      Y.one("#outputholder").append(node);
+    });
+    //]]>
+    </script>
   </div>
 
 
