@@ -7,7 +7,7 @@
     yplate  download, examples and documentation
   </title>
   <script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js" charset="utf-8"></script>
-  <script type="text/javascript" src="yplate.js"></script>
+  <script type="text/javascript" src="cyplate.js"></script>
   <style type="text/css">
   body {
     padding: 0 6em 0 2em;
@@ -145,8 +145,11 @@
     <div>
     <div class="pre">
   &lt;script type=&quot;text/javascript&quot;&gt;
-   YUI().use('gallery-yplate', function (Y) {
-      // access yplate code here
+   YUI({
+     //Last Gallery Build of this module
+     gallery: 'gallery-2011.02.18-23-10'
+   }).use('gallery-yplate', function (Y) {
+     // access yplate code here
    }
    &lt;/script&gt;
     </div>
