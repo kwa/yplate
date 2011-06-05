@@ -6,6 +6,8 @@
   <title>
     yplate  download, examples and documentation
   </title>
+  <script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="yplate.js"></script>
   <style type="text/css">
   body {
     padding: 0 6em 0 2em;
@@ -79,11 +81,27 @@
   .footspace {
     margin-bottom:4em;
   }
-  .api-summary dd {
-    padding: 0.5em 0;
-    color: #8B0000;
+  .pos7 {
+    text-align: left;
+    vertical-align: top;
   }
   
+  table.api-summary {
+    width: 80%;
+    border-collapse: collapse;
+  }
+  
+  .api-summary .code {
+    padding: 0.2em 0.5em 1em;
+    white-space: nowrap;
+    border: 1px #aaa solid;
+  }
+  
+  .api-summary .desc {
+    padding: 0.2em 0.5em 1em;
+    color: #000066;
+    border: 1px #aaa solid;
+  }
 </style>
 
 </head>
@@ -195,50 +213,96 @@
     API Summary
     </a>
   </h2>
-  
-    <dl class="api-summary">
-      <dt>var api = new Y.yplate();</dt>
-      <dd>The constructor to get an instance to work with</dd>
-      
-      <dt>api.plateTag(String /* one character */);</dt>
-      <dd>set the tag character for the api instance. The default is "%". Other choices can for example be "+" or "*"</dd>
-      
-      <dt> api.plate(HTMLnode|Node|String /*template source*/, object|array of object /* model */, String [templatecacheid] /*cache id*/, String [tag] /* tag character whose length = 1*/);</dt>
-      <dd>compiles template source, merges model and template to produce a Node or NodeList.
+  <table class="api-summary" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="code pos7">var api = <a name="api-yplate" href="#yplate">new Y.yplate();</a></td>
+      <td class="desc pos7">The constructor to get an instance to work with</td>
+    </tr>
+    
+    
+    <tr>
+      <td class="code pos7">api.<a name="api-plateTag" href="#plateTag">plateTag</a>(String /* one character */);</td>
+      <td class="desc pos7">set the tag character for the api instance. The default is "%". Other choices can for example be "+" or "*"</td>
+    </tr>
+    <tr>
+      <td class="code pos7">api.<a name="api-plate" href="#plate">plate</a>(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;HTMLnode|Node|String /*template source*/,<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;object|array of object /* model */, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;String [templatecacheid] /*cache id*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;String [tag] /* tag character whose length = 1*/);</td>
+      <td class="desc pos7">compiles template source, merges model and template to produce a Node or NodeList.
       If the optional templatecacheid is provided, the template will be cached.
-      If the optional tag is provided, it will be used instead of the default </dd>
-      
-      <dt>api.platecache(String /*templatecacheid*/, object|array of object, [tag]);</dt>
-      <dd>merges model and cached template to produce a Node or NodeList</dd>
-      
-      <dt>api.plateText(HTMLnode|Node|String /*template source*/, object|array of object /* model */, [templatecacheid] /*cache id*/, [tag] /* tag character*/);</dt>
-      <dd>merges model and template to produce an html string or an array of html string</dd>
-      
-      <dt>api.platecacheText(String /*templatecacheid*/, object|array of object, [tag]);// apply template to data, return html text | array of texts</dt>
-      <dd>merges model and cached template to produce an html string or an array of html string</dd>
-      
-      <dt>api.cachecompile(HTMLnode|Node|String, [templatecacheid]");// add to cache, return pre-compiled string.</dt>
-      <dd>compile template and add to cache if templatecacheid is provided, returns a template,
-      which can be used to with api.cacheadd()</dd>
-      
-      <dt>api.cacheadd(String /*templatecacheid*/, String /*result of api.cachecompile()*/);</dt>
-      <dd>add a pre-compiled template to the cache. Can be used if you pre-compile templates server-side and
-      simply want to insert them on page load or similar.</dd>
-      
-      <dt>api.cacheview(String /*templatecacheid*/);</dt>
-      <dd>check to see if the cache contains something for that id.</dd>
-      
-      <dt>In template variable "YPJ"</dt>
-      <dd>Current index, which starts at 0 (zero), into "YP_DATA"</dd>
-      
-      <dt>In template variable "YP_DATA"</dt>
-      <dd>The model provided as an array. If your input data-model is an array itself it will not be wrapped inside yet another array. It is assumed that each index
-      in the array contains a model for which to apply the template.</dd>
-      
-      <dt>In template variable "YP_DATA_SIZE"</dt>
-      <dd>The length of the "YP_DATA" array
-      </dd>
-    </dl>
+      If the optional tag is provided, it will be used instead of the default</td>
+    </tr>
+    <tr>
+      <td class="code pos7">api.<a name="api-platecache" href="#platecache">platecache</a>(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;object|array of object, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;[tag]);</td>
+      <td class="desc pos7">merges model and cached template to produce a Node or NodeList</td>
+    </tr>
+    <tr>  
+      <td class="code pos7">api.<a name="api-plateText" href="#plateText">plateText</a>(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;HTMLnode|Node|String /*template source*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;object|array of object /* model */, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;[templatecacheid] /*cache id*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;[tag] /* tag character*/);</td>
+      <td class="desc pos7">merges model and template to produce an html string or an array of html string</td>
+    </tr>
+    <tr> 
+      <td class="code pos7">api.<a name="api-platecacheText" href="#platecacheText">platecacheText</a>(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;object|array of object, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;[tag]);// apply template to data, return html text | array of texts</td>
+      <td class="desc pos7">merges model and cached template to produce an html string or an array of html string</td>
+    </tr>
+    <tr>  
+      <td class="code pos7">api.<a name="api-cachecompile" href="#cachecompile">cachecompile</a>(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;HTMLnode|Node|String, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;[templatecacheid]");// add to cache, return pre-compiled string.</td>
+      <td class="desc pos7">compile template and add to cache if templatecacheid is provided, returns a template,
+      which can be used to with api.cacheadd()</td>
+    </tr>
+    <tr>  
+      <td class="code pos7">api.<a name="api-cacheadd" href="#cacheadd">cacheadd</a>(<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;String /*result of api.cachecompile()*/);</td>
+      <td class="desc pos7">add a pre-compiled template to the cache. Can be used if you pre-compile templates server-side and
+      simply want to insert them on page load or similar.</td>
+    </tr>
+    <tr>  
+      <td class="code pos7">api.<a name="api-cacheview" href="#cacheview">cacheview</a>String /*templatecacheid*/);</td>
+      <td class="desc pos7">check to see if the cache contains something for that id.</td>
+    </tr>
+    <tr>  
+     <td class="code pos7">escape statement <a name="api-escape" href="#escape">"<%!"</a></td>
+      <td class="desc pos7">Useful when you need to print characters which could be interpreted as yplate reserved words like the print statement or similar.</td>
+    </tr>
+    <tr>  
+     <td class="code pos7">print statement <a name="api-print" href="#code">"<%="</a></td>
+      <td class="desc pos7">Placeholder for output data. The placeholder statement will be replaced be the data referenced inside the statement. <br/>Ex: &lt;%= this.json_data_value %&gt;</td>
+    </tr>
+    <tr>  
+     <td class="code pos7">code statement <a name="api-code" href="#code">"<% "</a></td>
+      <td class="desc pos7">When you want to define local javascript statements like definding local variables or such. <br/>
+      Ex: <% var a = this.json_data_part; %>,<br/> now "a" is available for the print statement like so: a-value is   <%= a %></td>
+    </tr>
+    <tr>  
+      <td class="code pos7">In template variable <a name="api-YP_DATA" href="#YP_DATA">"YP_DATA"</a></td>
+      <td class="desc pos7">The model provided as an array. If your input data-model is an array itself it will not be wrapped inside yet another array. It is assumed that each index
+      in the array contains a model for which to apply the template. <p>So if model is an array var your_model = [], then the model used as argyment to the yplate functions
+      should be wrapped inside an object: var yplate_model = {my_array:your_model}; And then accessed in the template code as <%= this.my_array[0] %> for example.</p></td>
+    </tr>
+    <tr>  
+     <td class="code pos7">In template variable <a name="api-YPJ" href="#YPJ">"YPJ"</a></td>
+      <td class="desc pos7">Current index, which starts at 0 (zero), into "YP_DATA"</td>
+    </tr>
+    <tr>  
+      <td class="code pos7">In template variable <a name="api-YP_DATA_SIZE" href="#YP_DATA_SIZE">"YP_DATA_SIZE"</a></td>
+      <td class="desc pos7">The length of the "YP_DATA" array</td>
+    </tr>
+  </table>
+
  
   
   
@@ -254,9 +318,9 @@
   <div>
     API introduced:
     <div class="api">
-      yplate(); // constructor<br/>
-      api.plateText(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return html text<br/>
-      api.plate(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return node<br/>
+      <a name="yplate" href="#api-yplate">yplate();</a> // constructor<br/>
+      api.<a name="plateText" href="#api-plateText">plateText</a>(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return html text<br/>
+      api.<a name="plate" href="#api-plate">plate</a>(HTMLnode|Node, data|array of data, [templatecacheid], [tag]);// apply template to data, return node<br/>
     </div>
     <div class="pre">
       
@@ -286,7 +350,7 @@
   <div>
     API introduced:
     <div class="api">
-      api.plateTag(String);<br/>
+      api.<a name="plateTag" href="#api-plateTag">plateTag</a>(String);<br/>
     </div>
     
       <div class="pre">
@@ -318,8 +382,8 @@
   <div>
     API introduced:
     <div class="api">
-      api.cachecompile(HTMLnode|Node, [templatecacheid]);// returned value is intended to be used by cacheadd(), you don't have to use the returned value, it will still be cached for the api instance.<br/>
-      api.platecacheText(templatecacheid /*string*/, data|array of data, [tag]);// apply cached template to data, return html text | array of texts<br/>
+      api.<a name="cachecompile" href="#api-cachecompile">cachecompile</a>(HTMLnode|Node, [templatecacheid]);// returned value is intended to be used by cacheadd(), you don't have to use the returned value, it will still be cached for the api instance.<br/>
+      api.<a name="platecacheText" href="#api-platecacheText">platecacheText</a>(templatecacheid /*string*/, data|array of data, [tag]);// apply cached template to data, return html text | array of texts<br/>
     </div>
     
       <div class="pre">
@@ -350,7 +414,7 @@
   <div>
     API introduced:
     <div class="api">
-      api.platecache(templatecacheid /*string*/, data|array data, [tag]);// apply template to data, return Node | NodeList<br/>
+      api.<a name="platecacheText" href="#api-platecacheText">platecache</a>(templatecacheid /*string*/, data|array data, [tag]);// apply template to data, return Node | NodeList<br/>
     </div>
     
       <div class="pre">
@@ -403,12 +467,12 @@
   <div>
     API used:
     <div class="api">
-      escape statement "&lt;%!"<br/>
-      print statement "&lt;%="<br/>
-      code statement "&lt;% "<br/>
-      special variable "YPJ"<br/>
-      special variable "YP_DATA"<br/>
-      special variable "YP_DATA_SIZE"<br/>
+      escape statement <a name="escape" href="#api-escape">"&lt;%!"</a><br/>
+      print statement <a name="print" href="#api-print">"&lt;%="</a><br/>
+      code statement <a name="code" href="#api-code">"&lt;% "</a><br/>
+      special variable <a name="YPJ" href="#api-YPJ">"YPJ"</a><br/>
+      special variable <a name="YP_DATA" href="#api-YP_DATA">"YP_DATA"</a><br/>
+      special variable <a name="YP_DATA_SIZE" href="#api-YP_DATA_SIZE">"YP_DATA_SIZE"</a><br/>
     </div>
     
       <div class="pre">
