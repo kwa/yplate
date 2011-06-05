@@ -283,18 +283,19 @@
     </tr>
     <tr>  
      <td class="code pos7">print statement <a name="api-print" href="#code">"<%="</a></td>
-      <td class="desc pos7">Placeholder for output data. The placeholder statement will be replaced be the data referenced inside the statement. <br/>Ex: &lt;%= this.json_data_value %&gt;</td>
+      <td class="desc pos7">Placeholder for output data. The placeholder statement will be replaced be the data referenced inside the statement.
+      <br/><pre>Ex: &lt;%= this.json_data_value %&gt;</pre></td>
     </tr>
     <tr>  
      <td class="code pos7">code statement <a name="api-code" href="#code">"<% "</a></td>
       <td class="desc pos7">When you want to define local javascript statements like definding local variables or such. <br/>
-      Ex: <% var a = this.json_data_part; %>,<br/> now "a" is available for the print statement like so: a-value is   <%= a %></td>
+      Ex: <pre><% var a = this.json_data_part; %></pre>,<br/> now "a" is available for the print statement like so: a-value is   <%= a %></td>
     </tr>
     <tr>  
       <td class="code pos7">In template variable <a name="api-YP_DATA" href="#YP_DATA">"YP_DATA"</a></td>
       <td class="desc pos7">The model provided as an array. If your input data-model is an array itself it will not be wrapped inside yet another array. It is assumed that each index
-      in the array contains a model for which to apply the template. <p>So if model is an array var your_model = [], then the model used as argyment to the yplate functions
-      should be wrapped inside an object: var yplate_model = {my_array:your_model}; And then accessed in the template code as <%= this.my_array[0] %> for example.</p></td>
+      in the array contains a model for which to apply the template. <p>So if your model is an array,<pre> var your_model = [];</pre>, then the model used as argument to the yplate functions
+      should be wrapped inside an object: <pre>var yplate_model = {my_array:your_model};</pre> And then accessed in the template code as <pre><%= this.my_array[0] %></pre> for example.</p></td>
     </tr>
     <tr>  
      <td class="code pos7">In template variable <a name="api-YPJ" href="#YPJ">"YPJ"</a></td>
