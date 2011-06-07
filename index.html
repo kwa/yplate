@@ -37,7 +37,7 @@
     -webkit-border-radius: 1em;
     white-space:pre;
   }
-  .fpre {
+  .fpre, .pretext {
     font-family:monospace;
     white-space:pre;
   }
@@ -102,6 +102,17 @@
     color: #000066;
     border: 1px #aaa solid;
   }
+  
+  .hotelListWrap {
+    width:250px; overflow:hidden; padding:0.5em; margin:1em 0; border:2px solid #aaa;background-color:#ddd; border-radius:1em;-moz-border-radius:1em;-wekit-border-radius:0.5em;
+  }
+  .padText {
+    padding-left: 110px;
+  }
+  .hotelName {
+    font-weight:bold;
+  }
+
 </style>
 
 </head>
@@ -118,7 +129,8 @@
   <ul class="tos">
     <li><a href="#one">How to make the yplate module available on your page</a></li>
     <li><a href="#five">API summary</a></li>
-    <li><a href="#two">yplate API documentation by example </a></li>
+    <li><a href="#two">API documentation for yplate using examples</a></li>
+    <li><a href="#twohalf">Other examples</a></li>
     <li><a href="#three">Troubleshooting </a></li>
     <li><a href="#four">Limitations and other important information</a></li>
     <li><a href="#six">Credits</a></li>
@@ -267,7 +279,7 @@
       which can be used to with api.cacheadd()</td>
     </tr>
     <tr>  
-      <td class="code pos7">api.<a name="api-cacheadd" href="#cacheadd">cacheadd</a>(<br>
+      <td class="code pos7">api.<a name="api-cacheadd" href="#cacheadd">cacheadd</a>(<br/>
       &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;String /*result of api.cachecompile()*/);</td>
       <td class="desc pos7">add a pre-compiled template to the cache. Can be used if you pre-compile templates server-side and
@@ -278,24 +290,24 @@
       <td class="desc pos7">check to see if the cache contains something for that id.</td>
     </tr>
     <tr>  
-     <td class="code pos7">escape statement <a name="api-escape" href="#escape">"<%!"</a></td>
+     <td class="code pos7">escape statement <a name="api-escape" href="#escape">"&lt;%!"</a></td>
       <td class="desc pos7">Useful when you need to print characters which could be interpreted as yplate reserved words like the print statement or similar.</td>
     </tr>
     <tr>  
-     <td class="code pos7">print statement <a name="api-print" href="#code">"<%="</a></td>
+     <td class="code pos7">print statement <a name="api-print" href="#code">"&lt;%="</a></td>
       <td class="desc pos7">Placeholder for output data. The placeholder statement will be replaced be the data referenced inside the statement.
-      <br/><pre>Ex: &lt;%= this.json_data_value %&gt;</pre></td>
+      <br/><span class="pretext">Ex: &lt;%= this.json_data_value %&gt;</span></td>
     </tr>
     <tr>  
-     <td class="code pos7">code statement <a name="api-code" href="#code">"<% "</a></td>
+     <td class="code pos7">code statement <a name="api-code" href="#code">"&lt;% "</a></td>
       <td class="desc pos7">When you want to define local javascript statements like definding local variables or such. <br/>
-      Ex: <pre><% var a = this.json_data_part; %></pre>,<br/> now "a" is available for the print statement like so: a-value is   <%= a %></td>
+      Ex: <span class="pretext">&lt;% var a = this.json_data_part; %&gt;</span>,<br/> now "a" is available for the print statement like so: a-value is   &lt;%= a %&gt;</td>
     </tr>
     <tr>  
       <td class="code pos7">In template variable <a name="api-YP_DATA" href="#YP_DATA">"YP_DATA"</a></td>
       <td class="desc pos7">The model provided as an array. If your input data-model is an array itself it will not be wrapped inside yet another array. It is assumed that each index
-      in the array contains a model for which to apply the template. <p>So if your model is an array,<pre> var your_model = [];</pre>, then the model used as argument to the yplate functions
-      should be wrapped inside an object: <pre>var yplate_model = {my_array:your_model};</pre> And then accessed in the template code as <pre><%= this.my_array[0] %></pre> for example.</p></td>
+      in the array contains a model for which to apply the template. <p>So if your model is an array,<span class="pretext"> var your_model = [];</span>, then the model used as argument to the yplate functions
+      should be wrapped inside an object: <span class="pretext">var yplate_model = {my_array:your_model};</span> And then accessed in the template code as <span class="pretext">&lt;%= this.my_array[0] %&gt;</span> for example.</p></td>
     </tr>
     <tr>  
      <td class="code pos7">In template variable <a name="api-YPJ" href="#YPJ">"YPJ"</a></td>
@@ -312,7 +324,7 @@
   
   <h2>
     <a name="two">
-    yplate API documentation by example
+    API documentation for yplate using examples
     </a>
   </h2>
   <div>DOWNLOAD the project files and run "examples.html" (<a href="http://github.com/kwa/yplate">kwa/yplate</a>) to see all of the following examples in action.</div>
@@ -712,6 +724,78 @@
     </script>
   </div>
 
+<h2>
+  <a name="twohalf">
+  Other examples
+  </a>
+</h2>
+<h3>
+  <a name="inline-quick">Create a list of hotels</a>
+</h3>
+    <div class="pre">
+  &lt;script type=&quot;text/x-yplate-template&quot; id=&quot;hotelItem&quot;&gt;
+  &lt;![CDATA[
+  &lt;div class=&quot;hotelListWrap&quot;&gt;
+    &lt;div class=&quot;imgWrap&quot; style=&quot;float:&lt;%= this.float %&gt;;&quot;&gt;
+      &lt;img src=&quot;&lt;%= this.img %&gt;&quot; height=&quot;&lt;%= this.height %&gt;&quot; alt=&quot;&quot;/&gt;
+    &lt;/div&gt;
+    &lt;% var css = this.float == &quot;left&quot; ? &quot;padText&quot;: &quot;&quot;; %&gt;
+    &lt;div class=&quot;&lt;%= css %&gt;&quot;&gt;
+      &lt;div class=&quot;hotelName&quot;&gt;&lt;%= this.hotelName %&gt;&lt;/div&gt;
+      &lt;div&gt;
+      &lt;% for(var i = 0; i &lt; this.numStars; i++) { %&gt;*&lt;% } %&gt;
+      &lt;/div&gt;
+      &lt;div&gt;&lt;%= this.description %&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+   ]]&gt;
+  &lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    YUI().use('yplate', function (Y) {
+    var api = new Y.yplate();
+    var modelList = [{img:&quot;img/house-blue.png&quot;, height:&quot;100px&quot;, float:&quot;left&quot;, numStars:5, hotelName:&quot;Hotel Blue&quot;, description:&quot;This is a mostly blue hotel.&quot;},
+                     {img:&quot;img/house-red.png&quot;, height:&quot;100px&quot;, float:&quot;right&quot;, numStars:4, hotelName:&quot;Hotel Red&quot;, description:&quot;This is kind of a redish hotel.&quot;},
+                     {img:&quot;img/house-pink.png&quot;, height:&quot;100px&quot;, float:&quot;left&quot;, numStars:3, hotelName:&quot;Hotel Pink&quot;, description:&quot;This is a hotel with a pink background.&quot;},
+                     {img:&quot;img/house-purple.png&quot;, height:&quot;100px&quot;, float:&quot;right&quot;, numStars:2, hotelName:&quot;Hotel Purple&quot;, description:&quot;This is a colorful hotel.&quot;}];
+    <b>var nodeList = api.plate(Y.one(&quot;#hotelItem&quot;), modelList);</b>
+    Y.one(&quot;#hotelList&quot;).append(nodeList);
+    });
+  &lt;/script&gt;
+    </div>
+  
+  <div>
+    <p>Result: </p>
+    <div id="hotelList"></div>
+    <script type="text/x-yplate-template" id="hotelItem">
+    <![CDATA[
+    <div class="hotelListWrap">
+      <div class="imgWrap" style="float:<%= this.float %>;">
+        <img src="<%= this.img %>" height="<%= this.height %>" alt=""/>
+      </div>
+      <% var css = this.float == "left" ? "padText": ""; %>
+      <div class="<%= css %>">
+        <div class="hotelName"><%= this.hotelName %></div>
+        <div>
+        <% for(var i = 0; i < this.numStars; i++) { %>*<% } %>
+        </div>
+        <div><%= this.description %></div>
+      </div>
+    </div>
+     ]]>
+    </script>
+    <script type="text/javascript">
+      YUI().use('yplate', function (Y) {
+      var api = new Y.yplate();
+      var modelList = [{img:"img/house-blue.png", height:"100px", float:"left", numStars:5, hotelName:"Hotel Blue", description:"This is a mostly blue hotel."},
+                       {img:"img/house-red.png", height:"100px", float:"right", numStars:4, hotelName:"Hotel Red", description:"This is kind of a redish hotel."},
+                       {img:"img/house-pink.png", height:"100px", float:"left", numStars:3, hotelName:"Hotel Pink", description:"This is a hotel with a pink background."},
+                       {img:"img/house-purple.png", height:"100px", float:"right", numStars:2, hotelName:"Hotel Purple", description:"This is a colorful hotel."}];
+      var nodeList = api.plate(Y.one("#hotelItem"), modelList);
+      Y.one("#hotelList").append(nodeList);
+      });
+    </script>
+    
+  </div>
 
 <h2>
   <a name="three">
