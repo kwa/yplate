@@ -257,8 +257,7 @@
       <td class="code pos7">api.<a name="api-cacheadd" href="#cacheadd">cacheadd</a>(<br/>
       &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;String /*result of api.cachecompile()*/);</td>
-      <td class="desc pos7">add a pre-compiled template to the cache. Can be used if you pre-compile templates server-side and
-      simply want to insert them on page load or similar.</td>
+      <td class="desc pos7">add a pre-compiled template to the cache. You can, for example, pre-compile templates (using cachecompile()) and save them server side. You can at a later time fetch the templates with an ajax request and insert them into an yplate instance using cacheadd().</td>
     </tr>
     <tr>  
       <td class="code pos7">api.<a name="api-cacheview" href="#cacheview">cacheview</a>String /*templatecacheid*/);</td>
@@ -270,7 +269,7 @@
     </tr>
     <tr>  
      <td class="code pos7">print statement <a name="api-print" href="#code">"&lt;%="</a></td>
-      <td class="desc pos7">Placeholder for output data. The placeholder statement will be replaced be the data referenced inside the statement.
+      <td class="desc pos7">Placeholder for output data. The print statement will be replaced by the data referenced inside the statement.
       <br/><span class="pretext">Ex: &lt;%= this.json_data_value %&gt;</span></td>
     </tr>
     <tr>  
@@ -857,4 +856,5 @@
 
 </body>
 </html>
+
 
