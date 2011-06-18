@@ -10,16 +10,23 @@
   <script type="text/javascript" src="yplate.js"></script>
   <style type="text/css">
   body {
-    padding: 0 6em 0 2em;
-    font: normal 1em Helvetica, Arial;
-    background-color:#FCFCFF;
+    width: 90%;
+    margin: 0 2em;
+    background-color: #FCFCFF;
+    font: 1em Helvetica, Arial;
   }
   h1,h2,h3 {
-    color: #191970;
+    color: #151B54;
+    background-color: #C6DEFF;
+    padding-left: 0.25em;
+    border-top: 2px solid #0000AA;
+    border-radius: 0.2em;
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
   }
   h3 {
     margin-top: 2em;
-    margin-bottom: 0em;
+    margin-bottom: 0.5em;
   }
   code {
     font-size: 1em;
@@ -27,19 +34,25 @@
   ul.tos {
     list-style: none;
   }
+  ol li {
+    margin-bottom:1.5em;
+  }
   div.pre {
     font-family:monospace;
+    white-space:pre;
     border: 1px solid #000;
     margin: 0;
+    overflow:auto;
     background-color: #FFFFCC;
     border-radius: 1em;
     -moz-border-radius: 1em;
     -webkit-border-radius: 1em;
-    white-space:pre;
   }
   .fpre, .pretext {
-    font-family:monospace;
-    white-space:pre;
+    font-family: monospace;
+  }
+  .fpre {
+    white-space: pre;
   }
   .plate-result {
     font-size: 1em;
@@ -87,7 +100,7 @@
   }
   
   table.api-summary {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
   }
   
@@ -243,13 +256,13 @@
       <td class="code pos7">api.<a name="api-platecacheText" href="#platecacheText">platecacheText</a>(<br/>
       &nbsp;&nbsp;&nbsp;&nbsp;String /*templatecacheid*/, <br/>
       &nbsp;&nbsp;&nbsp;&nbsp;object|array of object, <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;[tag]);// apply template to data, return html text | array of texts</td>
+      &nbsp;&nbsp;&nbsp;&nbsp;[tag]);</td>
       <td class="desc pos7">merges model and cached template to produce an html string or an array of html string</td>
     </tr>
     <tr>  
       <td class="code pos7">api.<a name="api-cachecompile" href="#cachecompile">cachecompile</a>(<br/>
       &nbsp;&nbsp;&nbsp;&nbsp;HTMLnode|Node|String, <br/>
-      &nbsp;&nbsp;&nbsp;&nbsp;[templatecacheid]");// add to cache, return pre-compiled string.</td>
+      &nbsp;&nbsp;&nbsp;&nbsp;[templatecacheid]");</td>
       <td class="desc pos7">compile template and add to cache if templatecacheid is provided, returns a template,
       which can be used to with api.cacheadd()</td>
     </tr>
@@ -619,8 +632,8 @@
       Inside your template you have some template global variables, they are:
       &lt;ul&gt;
         &lt;li&gt;YPJ: If your input to one of the yplate functions is an array of data models, then YPJ is the current index into that array.&lt;/li&gt;
-        &lt;li&gt;YP_DATA: Is your data model input as you have submitted it (if you only submitted an object and not an array,
-            your object will be inserted into an array so that YP_DATA is always an array).&lt;/li&gt;
+        &lt;li&gt;YP_DATA: YP_DATA is always an array. If you want an array as a model, then enclose your model inside an object for example:
+        &lt;span class=&quot;pretext&quot;&gt;{mydata:[..]}&lt;/span&gt;, where &lt;span class=&quot;pretext&quot;&gt;[..]&lt;/span&gt; is your array
         &lt;li&gt;YP_DATA_SIZE: The size of YP_DATA.&lt;/li&gt;
       &lt;/ul&gt;
       You can for example use these variables when you have provided an array of object-models to the template:&lt;br/&gt;&lt;br/&gt;
@@ -674,8 +687,8 @@
         Inside your template you have some template global variables, they are:
         <ul>
           <li>YPJ: If your input to one of the yplate functions is an array of data models, then YPJ is the current index into that array.</li>
-          <li>YP_DATA: Is your data model input as you have submitted it (if you only submitted an object and not an array,
-              your object will be inserted into an array so that YP_DATA is always an array).</li>
+          <li>YP_DATA: YP_DATA is always an array. If you want an array as a model, then enclose your model inside an object for example:
+          <span class="pretext">{mydata:[..]}</span>, where <span class="pretext">[..]</span> is your array.</li>
           <li>YP_DATA_SIZE: The size of YP_DATA.</li>
         </ul>
         You can for example use these variables when you have provided an array of object-models to the template:<br/><br/>
